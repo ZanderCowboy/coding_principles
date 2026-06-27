@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/atom-one-dark.dart';
 
 /// Read-only code view with a DartPad-style line-number gutter.
 class LineNumberedCodeView extends StatelessWidget {
@@ -15,18 +17,17 @@ class LineNumberedCodeView extends StatelessWidget {
     final lines = code.split('\n');
     final lineCount = lines.length;
 
-    final codeStyle = TextStyle(
-      fontFamily: 'monospace',
-      fontSize: _fontSize,
-      height: _lineHeight,
-      color: colorScheme.onSurface,
-    );
-
     final gutterStyle = TextStyle(
       fontFamily: 'monospace',
       fontSize: _fontSize,
       height: _lineHeight,
       color: colorScheme.onSurface.withValues(alpha: 0.5),
+    );
+
+    final highlightTextStyle = TextStyle(
+      fontFamily: 'monospace',
+      fontSize: _fontSize,
+      height: _lineHeight,
     );
 
     return SingleChildScrollView(
@@ -54,10 +55,12 @@ class LineNumberedCodeView extends StatelessWidget {
             child: SelectionArea(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Text(
+                child: HighlightView(
                   code,
-                  style: codeStyle,
-                  softWrap: false,
+                  language: 'dart',
+                  theme: atomOneDarkTheme,
+                  padding: EdgeInsets.zero,
+                  textStyle: highlightTextStyle,
                 ),
               ),
             ),
