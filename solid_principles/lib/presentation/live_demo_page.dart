@@ -104,10 +104,12 @@ class _LiveDemoPageState extends State<LiveDemoPage> {
             const SizedBox(height: 24),
             if (_status != null)
               Expanded(
-                child: SingleChildScrollView(
-                  child: Text(
-                    _status!,
-                    style: const TextStyle(fontFamily: 'monospace'),
+                child: SelectionArea(
+                  child: SingleChildScrollView(
+                    child: SelectableText(
+                      _status!,
+                      style: const TextStyle(fontFamily: 'monospace'),
+                    ),
                   ),
                 ),
               ),

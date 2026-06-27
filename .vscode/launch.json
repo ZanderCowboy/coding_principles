@@ -9,6 +9,14 @@
       "program": "lib/main.dart"
     },
     {
+      "name": "solid_principles (Chrome)",
+      "cwd": "solid_principles",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "chrome"
+    },
+    {
       "name": "solid_principles (profile)",
       "cwd": "solid_principles",
       "request": "launch",

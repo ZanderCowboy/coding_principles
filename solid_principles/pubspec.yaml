@@ -18,3 +18,20 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/domain/reminder.dart
+    - lib/principles/fundamentals/command_query_separation.dart
+    - lib/principles/fundamentals/dry.dart
+    - lib/principles/fundamentals/kiss.dart
+    - lib/principles/fundamentals/separation_of_concerns.dart
+    - lib/principles/fundamentals/yagni.dart
+    - lib/principles/grasp/assignment_patterns.dart
+    - lib/principles/grasp/change_patterns.dart
+    - lib/principles/grasp/coupling_cohesion.dart
+    - lib/principles/solid/dependency_inversion/reminder_notifier.dart
+    - lib/principles/solid/interface_segregation/in_memory_reminder_repository.dart
+    - lib/principles/solid/interface_segregation/reminder_reader.dart
+    - lib/principles/solid/liskov_substitution/reliable_sender.dart
+    - lib/principles/solid/open_closed/notification_sender.dart
+    - lib/principles/solid/single_responsibility/reminder_controller.dart
+    - lib/principles/solid/single_responsibility/reminder_validator.dart

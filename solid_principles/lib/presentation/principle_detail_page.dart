@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solid_principles/catalog/principle_info.dart';
+import 'package:solid_principles/presentation/widgets/source_file_panel.dart';
 
 class PrincipleDetailPage extends StatefulWidget {
   const PrincipleDetailPage({required this.principle, super.key});
@@ -42,73 +43,80 @@ class _PrincipleDetailPageState extends State<PrincipleDetailPage> {
 
     return Scaffold(
       appBar: AppBar(title: Text(principle.title)),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          Text(
-            principle.summary,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 24),
-          Text(
-            'What to say in an interview',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          ...principle.interviewTips.map(
-            (tip) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('• '),
-                  Expanded(child: Text(tip)),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            'Source files',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          ...principle.sourcePaths.map(
-            (path) => Text(path, style: const TextStyle(fontFamily: 'monospace')),
-          ),
-          const SizedBox(height: 24),
-          FilledButton.icon(
-            onPressed: _isRunning ? null : _runDemo,
-            icon: _isRunning
-                ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.play_arrow),
-            label: Text(_isRunning ? 'Running…' : 'Run demo'),
-          ),
-          if (_demoResult != null) ...[
-            const SizedBox(height: 16),
+      body: SelectionArea(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
             Text(
-              'Demo result',
+              principle.summary,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'What to say in an interview',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                _demoResult!,
-                style: const TextStyle(fontFamily: 'monospace'),
+            ...principle.interviewTips.map(
+              (tip) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('• '),
+                    Expanded(child: Text(tip)),
+                  ],
+                ),
               ),
             ),
+            const SizedBox(height: 24),
+            Text(
+              'Code examples',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Expand a file to read the full source.',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 8),
+            ...principle.sourcePaths.map(
+              (path) => SourceFilePanel(assetPath: path),
+            ),
+            const SizedBox(height: 24),
+            FilledButton.icon(
+              onPressed: _isRunning ? null : _runDemo,
+              icon: _isRunning
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.play_arrow),
+              label: Text(_isRunning ? 'Running…' : 'Run demo'),
+            ),
+            if (_demoResult != null) ...[
+              const SizedBox(height: 16),
+              Text(
+                'Demo result',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: SelectableText(
+                  _demoResult!,
+                  style: const TextStyle(fontFamily: 'monospace'),
+                ),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
