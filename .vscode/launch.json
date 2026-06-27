@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "solid_principles (debug)",
+      "cwd": "solid_principles",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "solid_principles (profile)",
+      "cwd": "solid_principles",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "solid_principles (tests)",
+      "cwd": "solid_principles",
+      "request": "launch",
+      "type": "dart",
+      "program": "test/principles_test.dart"
+    }
+  ]
+}
